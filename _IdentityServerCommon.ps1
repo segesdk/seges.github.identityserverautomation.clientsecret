@@ -55,6 +55,15 @@ function CreateClient([string]$identityserverUrl, [string]$body, [string]$accesT
     LogInfoAndThrowIf($resp);
 }
 
+function CreateClientSecret([string]$identityserverUrl, [string]$body, [string]$accesToken)
+{
+    $apiurl = $identityserverUrl + '/api/clientsecret'
+
+    $resp = Invoke-WebRequest -Method POST -Body $body -Headers @{'Authorization' = 'Bearer ' + $accesToken; 'Content-Type' = 'application/json' } -Uri $apiurl -SkipHttpErrorCheck
+
+    LogInfoAndThrowIf($resp);
+}
+
 
 function Convert-FromBase64StringWithNoPadding([string]$data)
 {
