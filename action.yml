@@ -1,6 +1,6 @@
 # https://confluence.seges.dk/pages/viewpage.action?pageId=166958870
-name: 'IdentityServer Client Resource Registration'
-description: 'Register Client resource in Identity Server'
+name: 'IdentityServer Client Secret Resource Registration'
+description: 'Register Client shared secret resource in Identity Server'
 inputs:
   IdentityServerClientId:
     description: 'Client id for logging into Identity Server'
