@@ -1,0 +1,29 @@
+# https://confluence.seges.dk/pages/viewpage.action?pageId=166958870
+name: 'IdentityServer Client Resource Registration'
+description: 'Register Client resource in Identity Server'
+inputs:
+  IdentityServerClientId:
+    description: 'Client id for logging into Identity Server'
+    required: true
+  IdentityServerClientSecret: 
+    description: 'Client secret for logging into Identity Server'
+    required: true
+  IdentityServerUrl: 
+    description: 'URL for the Identity Server'
+    required: true
+  ClientId: 
+    description: 'ClientId, hvor secret skal tilknyttes'
+    required: true
+  Secret:  
+    description: 'Ved ændring af Secret tilføjes der en ny Secret til Clienten. Se Client configuration (Symmetric / Client secret). https://confluence.seges.dk/display/DFL/Client+configuration#ClientSecret '
+    required: true
+outputs:
+  random-number:
+    description: "Random number"
+    value: ${{ steps.random-number-generator.outputs.random-id }}
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        ${{ github.action_path }}/clientSecret.ps1 -IdentityServerClientId ${{ inputs.IdentityServerClientId }} -IdentityServerClientSecret '${{ inputs.IdentityServerClientSecret }}' -IdentityServerUrl '${{ inputs.IdentityServerUrl  }}' -ClientId '${{ inputs.ClientId }}' -Secret '${{ inputs.Secret }}'
+      shell: pwsh
