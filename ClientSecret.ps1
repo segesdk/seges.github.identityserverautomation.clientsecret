@@ -14,7 +14,10 @@ param (
     $ClientId,
     [Parameter(Mandatory=$true)]
     [string]
-    $Secret
+    $Secret,
+    [Parameter(Mandatory=$true)]
+    [string]
+    $Environment
 )
 
 Set-StrictMode -Version Latest
@@ -32,7 +35,7 @@ if ($Secret.length -lt 50) {
 
 $secretType = "SharedSecret"
 
-$name = "$($OctopusEnvironmentName.ToUpper()) $ClientId";
+$name = "$Environment $ClientId";
 
 Write-Host "Running ClientSecret.ps1:"
 Write-Host "Name: $name"

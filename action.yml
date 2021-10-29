@@ -17,6 +17,9 @@ inputs:
   Secret:  
     description: 'Ved ændring af Secret tilføjes der en ny Secret til Clienten. Se Client configuration (Symmetric / Client secret). https://confluence.seges.dk/display/DFL/Client+configuration#ClientSecret '
     required: true
+  Environment:  
+    description: 'Environment'
+    required: true
 outputs:
   random-number:
     description: "Random number"
@@ -25,5 +28,5 @@ runs:
   using: "composite"
   steps:
     - run: |
-        ${{ github.action_path }}/clientSecret.ps1 -IdentityServerClientId ${{ inputs.IdentityServerClientId }} -IdentityServerClientSecret '${{ inputs.IdentityServerClientSecret }}' -IdentityServerUrl '${{ inputs.IdentityServerUrl  }}' -ClientId '${{ inputs.ClientId }}' -Secret '${{ inputs.Secret }}'
+        ${{ github.action_path }}/clientSecret.ps1 -IdentityServerClientId ${{ inputs.IdentityServerClientId }} -IdentityServerClientSecret '${{ inputs.IdentityServerClientSecret }}' -IdentityServerUrl '${{ inputs.IdentityServerUrl  }}' -ClientId '${{ inputs.ClientId }}' -Secret '${{ inputs.Secret }}' -Environment '${{ input.Environment }}'
       shell: pwsh
